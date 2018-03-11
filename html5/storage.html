@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>localStorage 对象</h2>
+  <div id="result"></div>
+  <p>
+    <button onclick="clickCounter()" type="button">请点击这里！</button>
+  </p>
+  <div id="result2"></div>
+  <p>请点击按钮使计数器递增。</p>
+  <p>请关闭浏览器或标签页，然后再试一次，计数器将继续计数（不会重置）。</p>
+  <h2>sessionStorage 对象</h2>
+  <p>
+    <button onclick="clickCounter2()" type="button">请点击这里</button>
+  </p>
+  <div id="result3"></div>
+  <p>请点击按钮使计数器递增。</p>
+  <p>请关闭浏览器或标签页，然后再试一次，计数器会重置。</p>
+</body>
+<script>
+  // Check browser support
+  if (typeof (Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("lastname", "Gates");
+    // Retrieve
+    document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+  } else {
+    document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
+  }
+</script>
+<script>
+  function clickCounter() {
+    if (typeof (Storage) !== "undefined") {
+      if (localStorage.clickcount) {
+        localStorage.clickcount = Number(localStorage.clickcount) + 1;
+      } else {
+        localStorage.clickcount = 1;
+      }
+      document.getElementById("result2").innerHTML = "您已经点击这个按钮 " + localStorage.clickcount + " 次。";
+    } else {
+      document.getElementById("result2").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
+    }
+  }
+</script>
+<script>
+  function clickCounter2() {
+    if (typeof (Storage) !== "undefined") {
+      if (sessionStorage.clickcount) {
+        sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+      } else {
+        sessionStorage.clickcount = 1;
+      }
+      document.getElementById("result3").innerHTML = "在本 session 中，您已经点击这个按钮 " + sessionStorage.clickcount + " 次。";
+    } else {
+      document.getElementById("result3").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
+    }
+  }
+</script>
+
+</html>
